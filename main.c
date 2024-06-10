@@ -3,11 +3,13 @@
 char board[6][7];
 void printBoard(void);
 void initBoard(void);
+void AddPiece(char piece, int id);
 
-void main () 
+void main() 
 {
     initBoard();
     printBoard();
+    
 
     return 0;
 }
@@ -33,5 +35,10 @@ void printBoard(void)
         }
         printf("\n");
     }
+    
+}
+
+void AddPiece(char piece, int id)
+{
     
 }
