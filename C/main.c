@@ -10,7 +10,21 @@ void main()
 {
     initBoard();
     printBoard();
-    
+    printf("Now let's put a piece in the 2nd column\n");
+    addPiece('x', 2);
+    printBoard();
+    addPiece('y', 2);
+    printBoard();
+    addPiece('y', 2);
+    printBoard();
+    addPiece('y', 2);
+    printBoard();
+    addPiece('x', 2);
+    printBoard();
+    addPiece('x', 2);
+    printBoard();
+    addPiece('y', 2);
+    printBoard();
 
     return 0;
 }
@@ -37,7 +51,7 @@ void printBoard(void)
         }
         printf("\n");
     }
-    
+   printf("\n"); 
 }
 
 int addPiece(char piece, int column)
