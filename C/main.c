@@ -3,7 +3,8 @@
 char board[6][7];
 void printBoard(void);
 void initBoard(void);
-void AddPiece(char piece, int id);
+int addPiece(char piece, int column); // Returns 1 if successful
+int findAvailable(int column);        // Returns available row
 
 void main() 
 {
@@ -25,6 +26,7 @@ void initBoard(void)
     }
 }
 
+// Board orientation: the first row to be printed is zero index
 void printBoard(void)
 {
     for (int i = 0; i < 6; i++)
@@ -38,7 +40,30 @@ void printBoard(void)
     
 }
 
-void AddPiece(char piece, int id)
+int addPiece(char piece, int column)
 {
-    
+    int row = findAvailable(column);
+    if (row == -1)
+    {
+        printf("Column is already full.\n");
+        return 0;
+    }
+    else
+    {
+        board[row][column] = piece;
+        return 1;
+    }
+}
+
+int findAvailable(int column)
+{
+    int i;
+    for (i = 6; i >= 0; i--)
+    {
+        if (board[i][column] == '-')
+        {
+            break;
+        }
+    }
+    return i;
 }
