@@ -5,7 +5,10 @@ void printBoard(void);
 void initBoard(void);
 int addPiece(char piece, int column); // Returns 1 if successful
 int findAvailable(int column);        // Returns available row
-int DidSomeoneWin(void);              // Returns the winner
+int didSomeoneWin(void);              // Returns the winner
+int checkHorizontal(char winner_piece, int i, int j);
+int checkVertical(char winner_piece, int i, int j);
+int checkDiagonal(char winner_piece, int i, int j);
 
 int main() 
 {
@@ -86,9 +89,96 @@ int findAvailable(int column)
     return i;
 }
 
-int DidSomeoneWin()
+int didSomeoneWin()
 {
+    char winner_piece;
+    int win = 0;
+
     // If 4 in a row horizontally
-    // If 4 in a row vertically
-    // If 4 in a row diagonally
+    for (int i = 0; i < 4 && !win; i++)
+    {
+        for (int j = 0; j < 7; j++)
+        {
+            if (board[i][j] != '-')
+            {
+                win = checkHorizontal(board[i][j], i, j);
+                if (win)
+                {
+                    break;
+                }
+                
+            }
+        }
+    }
+    
+    // If 4 in a row vertically CHANGE CONDITIONS
+    for (int i = 0; i < 4 && !win; i++)
+    {
+        for (int j = 0; j < 7; j++)
+        {
+            if (board[i][j] != '-')
+            {
+                win = checkHorizontal(board[i][j], i, j);
+                if (win)
+                {
+                    break;
+                }
+                
+            }
+        }
+    }
+
+    // If 4 in a row diagonally CHANGE CONDITIONS
+    for (int i = 0; i < 4 && !win; i++)
+    {
+        for (int j = 0; j < 7; j++)
+        {
+            if (board[i][j] != '-')
+            {
+                win = checkHorizontal(board[i][j], i, j);
+                if (win)
+                {
+                    break;
+                }
+                
+            }
+        }
+    }
+
+    if (win)
+    {
+        if (winner_piece == 'X')
+        {
+            return 1;
+        }
+        else if (winner_piece == 'O')
+        {
+            return 2;
+        }
+    }
+    
+    
+    return 3;
+}
+
+int checkHorizontal(char winner_piece, int i, int j)
+{
+    for (int k = i; k < i + 4; k++)
+    {
+        if (board[k][j] != winner_piece)
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int checkVertical(char winner_piece, int i, int j)
+{
+
+}
+
+int checkDiagonal(char winner_piece, int i, int j)
+{
+
 }
