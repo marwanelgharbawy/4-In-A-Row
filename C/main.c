@@ -5,26 +5,30 @@ void printBoard(void);
 void initBoard(void);
 int addPiece(char piece, int column); // Returns 1 if successful
 int findAvailable(int column);        // Returns available row
+int DidSomeoneWin(void);              // Returns the winner
 
-void main() 
+int main() 
 {
     initBoard();
     printBoard();
-    printf("Now let's put a piece in the 2nd column\n");
-    addPiece('x', 2);
-    printBoard();
-    addPiece('y', 2);
-    printBoard();
-    addPiece('y', 2);
-    printBoard();
-    addPiece('y', 2);
-    printBoard();
-    addPiece('x', 2);
-    printBoard();
-    addPiece('x', 2);
-    printBoard();
-    addPiece('y', 2);
-    printBoard();
+    printf("Now let's start!!\n");
+    int winner = 0;
+    int key;
+
+    while (!winner)
+    {
+        printf("Player 1's turn: ");
+        scanf("%d", &key);
+        addPiece('X', key - 1);
+
+        printBoard();
+
+        printf("Player 2's turn: ");
+        scanf("%d", &key);
+        addPiece('O', key - 1);
+
+        printBoard();
+    }
 
     return 0;
 }
@@ -80,4 +84,11 @@ int findAvailable(int column)
         }
     }
     return i;
+}
+
+int DidSomeoneWin()
+{
+    // If 4 in a row horizontally
+    // If 4 in a row vertically
+    // If 4 in a row diagonally
 }
