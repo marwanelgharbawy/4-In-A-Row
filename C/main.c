@@ -6,11 +6,13 @@ void printBoard(void);
 void initBoard(void);
 int addPiece(char piece, int column); // Returns 1 if successful
 int findAvailable(int column);        // Returns available row
+
 // int didSomeoneWin(void);           // Returns the winner
 // int checkHorizontal(char winner_piece, int i, int j);
 // int checkVertical(char winner_piece, int i, int j);
 // int checkDiagonal(char winner_piece, int i, int j);
-int checkWin(int i, int j);
+
+int checkWin(int i, int j); 
 
 int main() 
 {
@@ -80,6 +82,7 @@ int addPiece(char piece, int column)
     else
     {
         board[row][column] = piece;
+        checkWin(row, column);
         return 1;
     }
 }
@@ -97,6 +100,7 @@ int findAvailable(int column)
     return i;
 }
 
+// Now it only works horizontally
 int checkWin(int i, int j)
 {
     char winner_piece = board[i][j];
@@ -105,7 +109,6 @@ int checkWin(int i, int j)
 
     // if 4 in a row horizontally
     // move backwards until it finds the last character, then move forward and start counting
-
     while (board[i][x - 1] == winner_piece)
     {
         x--; // Move backwards
@@ -116,14 +119,12 @@ int checkWin(int i, int j)
     {
         if (board[i][k] != winner_piece)
         {
-            break;
+            return 0; // Only checks horizontal
+            // break;
         }
-        return 1;
     }
-
-    return 0;        
-    
-    
+    printf("FOUR IN A ROW!!!!\n");
+    return 1;
 
     // if 4 in a row vertically
 
