@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 char board[6][7];
+int win = 0;
 
 void printBoard(void);
 void initBoard(void);
@@ -12,32 +13,36 @@ int findAvailable(int column);        // Returns available row
 // int checkVertical(char winner_piece, int i, int j);
 // int checkDiagonal(char winner_piece, int i, int j);
 
-int checkWin(int i, int j); 
+int checkWin(int i, int j); // Changes win flag to 1
 
 int main() 
 {
     initBoard();
-    int winner = 0;
+    // int winner = 0;
     int key;
 
-    while (!winner)
+    while (!win)
     {
         printBoard();
 
         printf("Player 1's turn: ");
         scanf("%d", &key);
         addPiece('X', key - 1);
-        if (winner)
+        if (win)
         {
             printf("Player 1 won!\n");
         }
 
         printBoard();
+        if (win)
+        {
+            break;
+        }
 
         printf("Player 2's turn: ");
         scanf("%d", &key);
         addPiece('O', key - 1);
-        if (winner)
+        if (win)
         {
             printf("Player 1 won!\n");
         }
@@ -124,6 +129,7 @@ int checkWin(int i, int j)
         }
     }
     printf("FOUR IN A ROW!!!!\n");
+    win = 1;
     return 1;
 
     // if 4 in a row vertically
