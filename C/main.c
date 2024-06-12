@@ -118,21 +118,45 @@ int checkWin(int i, int j)
     {
         x--; // Move backwards
     }
-    // printf("x value: %d\n", x);
-
     for (int k = x + 1; k < x + 4; k++)
     {
+        win = 1;
         if (board[i][k] != winner_piece)
         {
-            return 0; // Only checks horizontal
-            // break;
+            win = 0;
+            break;
         }
     }
-    printf("FOUR IN A ROW!!!!\n");
-    win = 1;
-    return 1;
+    if (win)
+    {
+        printf("FOUR IN A ROW!!!!\n");
+        return 1;
+    }
+    // printf("No horizontal win...\n");
 
     // if 4 in a row vertically
+    // printf("index i is: %d\n", i);
+    if (i < 3) // First row to be printed is zero index, last one is 6
+    {
+        // printf("Checking vertical: row index: %d\n", i);
+        for (int k = i; k < i + 3; k++)
+        {
+            // printf("In vertical for loop...\n"); 
+            win = 1;
+            if (board[k][j] != winner_piece)
+            {
+                win = 0;
+                break;
+            }
+        }
+        if (win)
+        {
+            printf("FOUR IN A ROW!!!!\n");
+            return 1;
+        }
+    }
+    
+    
 
     // if 4 in a row diagonally
 }
