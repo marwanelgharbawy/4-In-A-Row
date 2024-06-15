@@ -101,80 +101,136 @@ int findAvailable(int column)
     return i;
 }
 
-// Now it only works horizontally
 int checkWin(int i, int j)
 {
     char winner_piece = board[i][j];
-    int x = i;
-    int y = j;
+    int count;
 
-    // if 4 in a row horizontally
-    // Move backwards until it finds the last character, then move forward and start counting
-    while (board[i][y - 1] == winner_piece)
-    {
-        y--; // Move backwards
-    }
-    for (int k = y + 1; k < y + 4; k++)
+    // Check horizontally
+
+    count = 1;
+    for (int y = j - 1; y >= 0 && board[i][y] == winner_piece; y--) count++;
+    for (int y = j + 1; y < 7 && board[i][y] == winner_piece; y++) count++;
+    if (count >= 4) 
     {
         win = 1;
-        if (board[i][k] != winner_piece)
-        {
-            win = 0;
-            break;
-        }
-    }
-    if (win)
-    {
-        printf("FOUR IN A ROW!!!!\n");
+        printf("FOUR IN A ROW HORIZONTALLY!!!!\n");
         return 1;
     }
 
-    // if 4 in a row vertically
-    if (i < 3) // First row to be printed is zero index, last one is 6
-    {
-        for (int k = i; k < i + 3; k++)
-        {
-            win = 1;
-            if (board[k][j] != winner_piece)
-            {
-                win = 0;
-                break;
-            }
-        }
-        if (win)
-        {
-            printf("FOUR IN A ROW!!!!\n");
-            return 1;
-        }
-    }
+    // Check vertically
 
-    // if 4 in a row diagonally
-    // Diagonals only have 2 cases
-    // First case: diagonal moving up then right
-    // Row is x, column is y
-    while (board[x + 1][y - 1] == winner_piece)
-    {
-        x++; // Go down
-        y--; // Go left
-    }
-    for (int k = x, l = y; k > x - 3 && l < y + 3; k--, l++)
+    count = 1;
+    for (int x = i - 1; x >= 0 && board[x][j] == winner_piece; x--) count++;
+    for (int x = i + 1; x < 6 && board[x][j] == winner_piece; x++) count++;
+    if (count >= 4) 
     {
         win = 1;
-        if (board[k][l] != winner_piece)
-        {
-            win = 0;
-            break;
-        }
-    }
-    if (win)
-    {
         printf("FOUR IN A ROW VERTICALLY!!!!\n");
         return 1;
     }
 
-    return 0;
+    // Check diagonal \
 
+    count = 1;
+    for (int x = i - 1, y = j - 1; x >= 0 && y >= 0 && board[x][y] == winner_piece; x--, y--) count++;
+    for (int x = i + 1, y = j + 1; x < 6 && y < 7 && board[x][y] == winner_piece; x++, y++) count++;
+    if (count >= 4) 
+    {
+        win = 1;
+        printf("FOUR IN A ROW DIAGONALLY!!!!\n");
+        return 1;
+    }
+
+    // Check diagonal /
+
+    count = 1;
+    for (int x = i - 1, y = j + 1; x >= 0 && y < 7 && board[x][y] == winner_piece; x--, y++) count++;
+    for (int x = i + 1, y = j - 1; x < 6 && y >= 0 && board[x][y] == winner_piece; x++, y--) count++;
+    if (count >= 4) 
+    {
+        win = 1;
+        printf("FOUR IN A ROW DIAGONALLY!!!!\n");
+        return 1;
+    }
+
+    return 0;
 }
+
+// // Now it only works horizontally
+// int checkWin(int i, int j)
+// {
+//     char winner_piece = board[i][j];
+//     int x = i;
+//     int y = j;
+
+//     // if 4 in a row horizontally
+//     // Move backwards until it finds the last character, then move forward and start counting
+//     while (board[i][y - 1] == winner_piece)
+//     {
+//         y--; // Move backwards
+//     }
+//     for (int k = y + 1; k < y + 4; k++)
+//     {
+//         win = 1;
+//         if (board[i][k] != winner_piece)
+//         {
+//             win = 0;
+//             break;
+//         }
+//     }
+//     if (win)
+//     {
+//         printf("FOUR IN A ROW!!!!\n");
+//         return 1;
+//     }
+
+//     // if 4 in a row vertically
+//     if (i < 3) // First row to be printed is zero index, last one is 6
+//     {
+//         for (int k = i; k < i + 3; k++)
+//         {
+//             win = 1;
+//             if (board[k][j] != winner_piece)
+//             {
+//                 win = 0;
+//                 break;
+//             }
+//         }
+//         if (win)
+//         {
+//             printf("FOUR IN A ROW!!!!\n");
+//             return 1;
+//         }
+//     }
+
+//     // if 4 in a row diagonally
+//     // Diagonals only have 2 cases
+//     // First case: diagonal moving up then right /
+//     // Row is x, column is y
+//     while (board[x + 1][y - 1] == winner_piece)
+//     {
+//         x++; // Go down
+//         y--; // Go left
+//     }
+//     for (int k = x, l = y; k > x - 3 && l < y + 3; k--, l++)
+//     {
+//         win = 1;
+//         if (board[k][l] != winner_piece)
+//         {
+//             win = 0;
+//             break;
+//         }
+//     }
+//     if (win)
+//     {
+//         printf("FOUR IN A ROW VERTICALLY!!!!\n");
+//         return 1;
+//     }
+
+//     return 0;
+
+// }
 
 // int didSomeoneWin()
 // {
